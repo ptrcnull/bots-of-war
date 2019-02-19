@@ -26,12 +26,12 @@ public class BotMap implements TileBasedMap {
 	}
 	
 	public String getBlockType(int x, int y) {
-		return blockTypes.get(this.getBlock(x,  y));
+		return blockTypes[getBlock(x, y)];
 	}
 	
 	public String toString() {
 		String str = "\n";
-		for(Integer[] row : this.map) {
+		for(Integer[] row : map) {
 			str += "[";
 			for (Integer field : row) {
 				str += String.valueOf(field);
