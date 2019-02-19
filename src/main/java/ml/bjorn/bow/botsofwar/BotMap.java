@@ -2,6 +2,7 @@ package ml.bjorn.bow.botsofwar;
 
 import ml.bjorn.bow.botsofwar.utils.FileUtils;
 
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
 import org.newdawn.slick.util.pathfinding.TileBasedMap;
@@ -77,6 +78,20 @@ public class BotMap implements TileBasedMap {
 			str += "<div class=\"row\">";
 			for (int x = 0; x < map[0].length; x++) {
 				str += getBlockHTMLImageTag(x, y);
+			}
+			str += "</div>";
+		}
+		return str;
+	}
+
+	public String toHTMLWithPath(int fromX, int fromY, int toX, int toY) {
+		AStarPathFinder pathFinder = new AStarPathFinder(this, 1000, false);
+		Path path = pathFinder.findPath(null, fromX, fromY, toX, toY);
+		String str = "";
+		for(int y = 0; y < map.length; y++) {
+			str += "<div class=\"row\">";
+			for (int x = 0; x < map[0].length; x++) {
+				str += path.contains(x, y) ? "<img src=\"https://botsofwar.bjorn.ml/static/img/path.png\">" : getBlockHTMLImageTag(x, y);
 			}
 			str += "</div>";
 		}
