@@ -1,6 +1,5 @@
 package ml.bjorn.bow.botsofwar;
 
-import java.util.HashMap;
 
 import org.newdawn.slick.util.pathfinding.Path;
 import org.newdawn.slick.util.pathfinding.PathFindingContext;
@@ -8,10 +7,7 @@ import org.newdawn.slick.util.pathfinding.TileBasedMap;
 
 public class BotMap implements TileBasedMap {
 	public Integer[][] map;
-	HashMap<Integer, String> blockTypes = new HashMap<Integer, String>() {{
-	    put(0, "trawa");
-	    put(1, "kamien");
-	}};
+	public static String[] blockTypes = {"dirt", "grass", "water", "stone", "base", "mine"};
 
 	public BotMap(Integer[][] m) {
 		this.map = new Integer[m.length][m[0].length];
