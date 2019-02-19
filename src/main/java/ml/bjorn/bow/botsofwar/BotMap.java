@@ -45,7 +45,7 @@ public class BotMap implements TileBasedMap {
 		return str;
 	}
 	
-	public String toStringWithPath(Path path) {
+	public String toString(Path path) {
 		String str = "\n";
 		for(int y = 0; y < map.length; y++) {
 			str += "[";
