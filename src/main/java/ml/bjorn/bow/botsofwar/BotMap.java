@@ -10,10 +10,15 @@ public class BotMap implements TileBasedMap {
 	public static String[] blockTypes = {"dirt", "grass", "water", "stone", "base", "mine"};
 
 	public BotMap(Integer[][] m) {
-		this.map = new Integer[m.length][m[0].length];
-		for (int i = 0; i < m.length; i++) {
-			this.map[i] = m[m.length - 1 - i];
+		this.map = rotateMap(m);
+	}
+
+	public static Integer[][] rotateMap(Integer[][] map) {
+		Integer[][] newMap = new Integer[map.length][map[0].length];
+		for (int i = 0; i < map.length; i++) {
+			newMap[i] = map[map.length - 1 - i];
 		}
+		return newMap;
 	}
 	
 	public Integer getBlock(int x, int y) {
