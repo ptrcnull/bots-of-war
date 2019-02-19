@@ -28,6 +28,10 @@ public class BotMap implements TileBasedMap {
 	public String getBlockType(int x, int y) {
 		return blockTypes[getBlock(x, y)];
 	}
+
+	public String getBlockHTMLImageTag(int x, int y) {
+		return "<img src=\"https://botsofwar.bjorn.ml/static/img/" + getBlockType(x, y) + ".png\">";
+	}
 	
 	public String toString() {
 		String str = "\n";
