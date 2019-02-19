@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class BowApplication {
 	static final Logger log = LoggerFactory.getLogger(BowApplication.class);
+	static MapHolder mapHolder = new MapHolder();
 	public static void main(String[] args) {
 		SpringApplication.run(BowApplication.class, args);
 	}
@@ -48,5 +49,11 @@ public class BowApplication {
 		};
 	}
 
+  static class MapHolder {
+    private BotMap map;
+    MapHolder() {}
+    public BotMap getMap() { return this.map; }
+    public void setMap(BotMap map) { this.map = map; }
+  }
 }
 
