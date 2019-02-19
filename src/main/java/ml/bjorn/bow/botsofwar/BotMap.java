@@ -50,8 +50,7 @@ public class BotMap implements TileBasedMap {
 		for(int y = 0; y < map.length; y++) {
 			str += "[";
 			for (int x = 0; x < map[0].length; x++) {
-				Integer tile = map[y][x];
-				str += path.contains(x,  y) ? " " : String.valueOf(tile);
+				str += path.contains(x,  y) ? " " : String.valueOf(getBlock(x, y));
 			}
 			str += "]\n";
 		}
@@ -69,12 +68,11 @@ public class BotMap implements TileBasedMap {
 	}
 
 	@Override
-	public void pathFinderVisited(int x, int y) {
-	}
+	public void pathFinderVisited(int x, int y) {}
 
 	@Override
 	public boolean blocked(PathFindingContext context, int tx, int ty) {
-		Integer block = map[ty][tx];
+		Integer block = getBlock(tx, ty);
 		return !(block == 0 || block == 1);
 	}
 
