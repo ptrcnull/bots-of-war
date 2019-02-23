@@ -1,5 +1,7 @@
 package ml.bjorn.bow.botsofwar;
 
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
+import org.newdawn.slick.util.pathfinding.Path;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,10 @@ public class MapViewController {
     @RequestParam(name="toY", required=true) int toY,
     Model model
   ) {
-    model.addAttribute("map", BowApplication.mapHolder.getMap().toHTMLWithPath(fromX, fromY, toX, toY));
+    Map map = BowApplication.mapHolder.getMap();
+		AStarPathFinder pathFinder = new AStarPathFinder(map, 1000, false);
+		Path path = pathFinder.findPath(null, fromX, fromY, toX, toY);
+    model.addAttribute("map", map.toHTML(path));
     return "map";
   }
 

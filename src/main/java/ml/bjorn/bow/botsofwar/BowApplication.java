@@ -1,6 +1,6 @@
 package ml.bjorn.bow.botsofwar;
 
-import ml.bjorn.bow.botsofwar.BotMap;
+import ml.bjorn.bow.botsofwar.Map;
 import ml.bjorn.bow.botsofwar.utils.FileUtils;
 import ml.bjorn.bow.botsofwar.utils.PathUtils;
 
@@ -35,25 +35,30 @@ public class BowApplication {
 		return args -> {
 			API api = new API(restTemplate);
 			
-			BotMap map = new BotMap(api.getMap());
+			Map map = new Map(api.getMap());
 			BowApplication.mapHolder.setMap(map);
 			log.info(map.toString());
+
 			AStarPathFinder pathFinder = new AStarPathFinder(map, 1000, false);
 			Path path = pathFinder.findPath(null,  0,  0,  6,  7);
 			log.info(map.toString(path));
+
 			log.info(Arrays.toString(PathUtils.getMovesListFromPath(path)));
 			FileUtils.saveFile("./index.html", map.toHTMLTemplate());
-	
-			Entity[] entities = api.getEntites();
-			log.info(entities[0].toString());
+
+			map.updateCoordinates(api.getCoordinates());
+			log.info(map.toString());
+
+			map.updateEntities(api.getEntities());
+			log.info(map.toString());
 		};
 	}
 
   static class MapHolder {
-    private BotMap map;
+    private Map map;
     MapHolder() {}
-    public BotMap getMap() { return this.map; }
-    public void setMap(BotMap map) { this.map = map; }
+    public Map getMap() { return this.map; }
+    public void setMap(Map map) { this.map = map; }
   }
 }
 
